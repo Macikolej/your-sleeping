@@ -1,0 +1,116 @@
+@import "shared/styles";
+
+@keyframes menu-arrive {
+	0% {
+		transform: translateX(300px);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes menu-hide {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(300px);
+	}
+}
+
+.MainContainer {
+	width: 100vw;
+	height: 100vh;
+	background-color: #F9F4ED;
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+}
+
+.header {
+	padding: 0 40px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	background-color: #769C7A;
+	width: 100%;
+}
+
+.logo {
+	height: 50px;
+	cursor: pointer;
+}
+
+.rightMenu {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	position: relative;
+	height: 100%;
+}
+
+.userIcon {
+	height: 30px;
+}
+
+.menuIcon {
+	height: 20px;
+}
+
+.content {
+	flex: 1;
+}
+
+.menuButton {
+	cursor: pointer;
+}
+
+.dropdown {
+	display: flex !important;
+	position: absolute;
+	width: 300px;
+	background: white;
+	border-radius: 0 0 0 20px;
+	z-index: 1;
+	top: 100%;
+	left: -100px;
+	animation-name: menu-arrive;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	border-bottom: 4px solid #769C7A;
+	border-left: 4px solid #769C7A;
+}
+
+.dropdownHide {
+	display: flex !important;
+	position: absolute;
+	width: 300px;
+	background: white;
+	border-radius: 0 0 0 20px;
+	z-index: 1;
+	left: -100px;
+	top: 100%;
+	animation-name: menu-hide;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+	border-bottom: 4px solid #769C7A;
+	border-left: 4px solid #769C7A;
+}
+
+.dpd {
+	display: none;
+	flex-direction: column;
+	gap: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.button {
+	width: 200px;
+}
+
+

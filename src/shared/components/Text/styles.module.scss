@@ -1,0 +1,36 @@
+@import "shared/styles";
+
+.bold {
+	font-weight: $fw-bold;
+}
+
+.Text {
+	display: flex;
+	justify-content: center;
+	font-family: $ff-primary;
+	white-space: pre-line;
+	align-items: center;
+	line-height: 1.2;
+	word-break: break-word;
+	height: fit-content;
+}
+
+.text {
+	position: relative;
+}
+
+.black {
+	color: black;
+}
+
+.olive {
+	color: #417339;;
+}
+
+.sage {
+	color: #769C7A;
+}
+
+.red {
+	color: #F24D57;
+}

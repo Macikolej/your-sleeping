@@ -1,0 +1,37 @@
+@import "shared/styles";
+
+.overlay {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(227, 224, 224, 0.36);
+	z-index: 10;
+}
+
+
+.confirmationContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: white;
+	z-index: 100;
+	padding: 25px;
+	box-sizing: border-box;
+	border-radius: 20px;
+	gap: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.buttonsContainer {
+	display: flex;
+	gap: 20px;
+}
+
+.button {
+	width: 150px;
+}

@@ -1,0 +1,46 @@
+@import "shared/styles";
+
+.ConversationPage {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	padding: 25px;
+	box-sizing: border-box;
+}
+
+.newChatButton {
+	width: 200px;
+}
+
+.buttonContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100px;
+}
+
+.content {
+	flex: 1;
+	background: #FFFFFF;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	padding: 25px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.absoluteButton {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	cursor: pointer;
+}
+
+.absoluteButtonCaption {
+	font-size: 20px;
+}

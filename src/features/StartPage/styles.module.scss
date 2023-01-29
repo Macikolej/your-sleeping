@@ -1,0 +1,13 @@
+@import "shared/styles";
+
+.StartPage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	height: 100%;
+}
+
+.startPageButton {
+	width: 200px;
+}
