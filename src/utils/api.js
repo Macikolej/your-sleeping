@@ -1,7 +1,7 @@
 import ky from "ky";
 
 const apiClient = ky.create({
-  prefixUrl: "https://my-sleeping.herokuapp.com/api",
+  prefixUrl: "https://my-sleeping-v2.herokuapp.com/api",
   headers: {
     "Access-Control-Allow-Origin": "http://localhost:3000",
     "Access-Control-Allow-Methods": "*",
@@ -36,11 +36,10 @@ export const apiEditUser = (userId, userData) =>
     json: { ...userData },
   });
 
-export const apiEditObject = (objectId, objectData) => {
+export const apiEditObject = (objectId, objectData) =>
   authClient.put(`places/${objectId}`, {
     json: { ...objectData },
   });
-};
 
 export const apiDeleteUser = (userId) => authClient.delete(`users/${userId}`);
 export const apiDeleteObject = (objectId) =>
@@ -61,7 +60,7 @@ export const apiCreateConversation = (username) =>
 export const apiSendMessage = (conversationId, message) =>
   authClient.post(`chat/${conversationId}`, {
     json: {
-      message,
+      text: message,
     },
   });
 

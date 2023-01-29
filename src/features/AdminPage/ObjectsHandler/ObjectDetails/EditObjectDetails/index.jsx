@@ -12,13 +12,23 @@ import { apiEditObject } from "utils/api";
 
 import css from "./styles.module.scss";
 
+const handleFileChange = async (event, setImage) => {
+	const file = event.target.files[0];
+
+	const reader = new FileReader();
+
+	reader.onloadend = () => {
+		setImage(reader.result);
+	};
+
+	reader.readAsDataURL(file);
+};
+
 const validate = (name, basePricePerNight, maxAccommodated) => {
 	let passed = true;
 	if (name.length === 0) {
 		passed = false;
 	}
-
-	console.log(basePricePerNight, isFinite(basePricePerNight));
 
 	if (!isFinite(basePricePerNight) || basePricePerNight < 0) {
 		passed = false;
@@ -53,6 +63,7 @@ export const EditObjectDetails = ({
 		object.maxAccommodated
 	);
 	const [isCouchSurfing, setIsCouchSurfing] = useState(object.isCouchSurfing);
+	const [image, setImage] = useState(object.images[0]);
 
 	const [isInvalid, setIsInvalid] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
@@ -69,6 +80,7 @@ export const EditObjectDetails = ({
 				basePricePerNight,
 				maxAccommodated,
 				isCouchSurfing,
+				images: [image],
 			});
 
 			setIsLoading(false);
@@ -154,26 +166,34 @@ export const EditObjectDetails = ({
 						className={css.input}
 					/>
 				</div>
-				<input type="file" className={css.hidden} ref={inputRef} />
+				<div className={css.innerInputContainer}>
+					<input
+						type="checkbox"
+						name="isCouchSurfing"
+						defaultChecked={isCouchSurfing}
+						className={css.radioButton}
+						onClick={(e) => setIsCouchSurfing(e.target.checked)}
+					/>
+					<Text className={css.t3}>Couch surfing</Text>
+				</div>
+				<input
+					type="file"
+					className={css.hidden}
+					ref={inputRef}
+					accept="image/png, image/gif, image/jpeg"
+					onChange={(event) => handleFileChange(event, setImage)}
+				/>
 				<button
 					className={css.imageContainer}
 					onClick={() => inputRef.current.click()}
 				>
 					<img
 						onClick={() => inputRef.current.click()}
-						src={
-							"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-						}
+						src={image}
 						alt=""
 						className={cn(css.image, {
-							[css.horizontal]:
-								getOrientation(
-									"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-								) === "horizontal",
-							[css.vertical]:
-								getOrientation(
-									"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-								) === "vertical",
+							[css.horizontal]: getOrientation(image) === "horizontal",
+							[css.vertical]: getOrientation(image) === "vertical",
 						})}
 					/>
 				</button>

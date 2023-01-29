@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { Text } from "shared/components/Text";
 import { Button } from "shared/components/Button";
@@ -17,6 +17,18 @@ const map = {
 	"user-client": "krzysztof jarzyna",
 };
 
+const sortConversations = (c1, c2) => {
+	const d1 = new Date(c1.created).getTime();
+	const d2 = new Date(c2.created).getTime();
+
+	if (d1 > d2) {
+		return 1;
+	} else if (d2 > d1) {
+		return -1;
+	}
+	return 0;
+};
+
 export const Conversation = ({
 	username,
 	conversationId,
@@ -29,8 +41,10 @@ export const Conversation = ({
 	const [shouldRefetch, setShouldRefetch] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState("");
+	const scrollRef = useRef();
 
 	const sendMessage = async (message) => {
+		setMessage("")
 		if (!message) {
 			return;
 		}
@@ -83,6 +97,12 @@ export const Conversation = ({
 		}
 	}, [conversationId]);
 
+	useEffect(() => {
+		if (scrollRef.current) {
+			scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+		}
+	}, [])
+
 	if (isLoading) {
 		return <LoadingStatus />;
 	}
@@ -91,7 +111,7 @@ export const Conversation = ({
 
 	return (
 		<div className={css.Conversation}>
-			<div className={css.content}>
+			<div className={css.content} ref={scrollRef}>
 				<button
 					className={css.absoluteButton}
 					onClick={() => {
@@ -104,7 +124,7 @@ export const Conversation = ({
 				<Text className={css.t1}>{map[username]}</Text>
 				<div className={css.conversationContainer}>
 					{conversation &&
-						conversation.messages.map((el, i) => {
+						conversation.messages.sort(sortConversations).map((el, i) => {
 							if (el.text) {
 								return (
 									<div key={i} className={css.messageContainer}>
@@ -126,7 +146,7 @@ export const Conversation = ({
 						placeholder="Napisz wiadomość..."
 						className={css.input}
 						value={message}
-						onChange={(e) => setMessage(e.current.value)}
+						onChange={(e) => setMessage(e.target.value)}
 					/>
 					<Button
 						text="Wyślij"

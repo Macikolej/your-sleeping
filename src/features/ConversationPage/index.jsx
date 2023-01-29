@@ -12,6 +12,7 @@ export const ConversationPage = ({ ourUsername }) => {
 	const map = {
 		"user-host": "jan kochanowski",
 		"user-client": "krzysztof jarzyna",
+		"user-admin": "adam małysz"
 	};
 
 	const [conversations, setConversations] = useState(null);
@@ -32,8 +33,6 @@ export const ConversationPage = ({ ourUsername }) => {
 
 		getConversations();
 	}, []);
-
-	console.log(conversations);
 
 	useEffect(() => {
 		const getUsers = async () => {

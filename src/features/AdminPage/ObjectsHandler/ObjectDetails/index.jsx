@@ -33,7 +33,7 @@ const getOrientation = (image) => {
 };
 
 const onDelete = (id, setShouldRefetch, setPickedObjectId) => {
-	// apiDeleteObject(id);
+	apiDeleteObject(id);
 	setShouldRefetch(true);
 	setPickedObjectId(null);
 };
@@ -47,8 +47,6 @@ export const ObjectDetails = ({
 	const [isEditing, setIsEditing] = useState(false);
 	const [shouldRefetchDetails, setShouldRefetchDetails] = useState(false);
 	const [isDeleting, setIsDeleting] = useState(false);
-
-	console.log(object);
 
 	useEffect(() => {
 		const fetchObjectData = async () => {
@@ -111,19 +109,12 @@ export const ObjectDetails = ({
 				<div className={css.leftColumn}>
 					<div className={css.imageContainer}>
 						<img
-							src={
-								"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-							}
+							src={object.images[0]}
 							alt=""
 							className={cn(css.image, {
 								[css.horizontal]:
-									getOrientation(
-										"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-									) === "horizontal",
-								[css.vertical]:
-									getOrientation(
-										"https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
-									) === "vertical",
+									getOrientation(object.images[0]) === "horizontal",
+								[css.vertical]: getOrientation(object.images[0]) === "vertical",
 							})}
 						/>
 					</div>

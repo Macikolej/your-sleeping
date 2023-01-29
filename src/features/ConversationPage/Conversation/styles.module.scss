@@ -21,12 +21,17 @@
 	box-sizing: border-box;
 	gap: 20px;
 	position: relative;
+	overflow-y: scroll;
+	max-height: 600px;
 }
 
 .conversationContainer {
 	display: flex;
 	flex: 1;
+	gap: 10px;
 	flex-direction: column;
+	height: 80%;
+	overflow-y: scroll;
 }
 
 .t1 {
